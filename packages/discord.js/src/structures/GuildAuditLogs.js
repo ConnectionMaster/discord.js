@@ -1,10 +1,10 @@
 'use strict';
 
 const { Collection } = require('@discordjs/collection');
-const ApplicationCommand = require('./ApplicationCommand');
-const GuildAuditLogsEntry = require('./GuildAuditLogsEntry');
-const Integration = require('./Integration');
-const Webhook = require('./Webhook');
+const { ApplicationCommand } = require('./ApplicationCommand');
+const { GuildAuditLogsEntry } = require('./GuildAuditLogsEntry');
+const { Integration } = require('./Integration');
+const { Webhook } = require('./Webhook');
 const { flatten } = require('../util/Util');
 
 /**
@@ -78,7 +78,7 @@ class GuildAuditLogs {
      */
     this.entries = new Collection();
     for (const item of data.audit_log_entries) {
-      const entry = new GuildAuditLogsEntry(this, guild, item);
+      const entry = new GuildAuditLogsEntry(guild, item, this);
       this.entries.set(entry.id, entry);
     }
   }
@@ -88,4 +88,4 @@ class GuildAuditLogs {
   }
 }
 
-module.exports = GuildAuditLogs;
+exports.GuildAuditLogs = GuildAuditLogs;
